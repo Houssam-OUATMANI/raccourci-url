@@ -11,6 +11,25 @@
 </head>
 
 <body class="container mx-auto">
+    <div class="navbar bg-base-100 shadow-sm">
+        <div class="flex-1">
+            <a href="/" class="btn btn-ghost text-xl">Raccouri URL</a>
+        </div>
+        <div class="flex-none">
+            <ul class="menu menu-horizontal px-1">
+                <li><a>Link</a></li>
+                <li>
+                    <details>
+                        <summary>Auth</summary>
+                        <ul class="bg-base-100 rounded-t-none p-2">
+                            <li><a href="/inscription" >Inscription</a></li>
+                            <li><a href="/connexion">Connexion</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </div>
+    </div>
     <?= $content ?? '' ?>
 </body>
 
