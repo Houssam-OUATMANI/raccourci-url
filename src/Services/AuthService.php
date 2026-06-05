@@ -20,7 +20,8 @@ class AuthService
         $user = new User()
             ->set_username($userDto->username)
             ->set_email($userDto->email)
-            ->set_password($password);
+            ->set_password($password)
+            ->set_role("USER");
         return $this->repo->create($user);
     }
 }

@@ -39,9 +39,9 @@ class UserRepo implements UserRepositoryInterface
     #[Override]
     public function create(User $user): bool
     {
-         $query = "INSERT INTO users(username, email, password) VALUES (?, ?, ?)";
+         $query = "INSERT INTO users(username, email, password, role) VALUES (?, ?, ?)";
          $stmt = $this->db->pdo()->prepare($query);
-         return $stmt->execute([$user->username, $user->email, $user->password]);
+         return $stmt->execute([$user->username, $user->email, $user->password, $user->role]);
     }
 
 
