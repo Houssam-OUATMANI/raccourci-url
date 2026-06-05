@@ -8,7 +8,9 @@
     ],
     "require": {
         "slim/slim": "^4.15",
-        "slim/psr7": "^1.8"
+        "slim/psr7": "^1.8",
+        "symfony/var-dumper": "^8.1",
+        "php-di/php-di": "^7.1"
     },
 
     "autoload": {

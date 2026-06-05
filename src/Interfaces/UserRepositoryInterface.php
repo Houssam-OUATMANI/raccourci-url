@@ -13,4 +13,7 @@ interface UserRepositoryInterface
 
 
     public function find_by_email(string $email) : ?User;
+
+
+    public function create(User $user) : bool;
 }

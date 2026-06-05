@@ -34,4 +34,15 @@ class UserRepo implements UserRepositoryInterface
         if (!$data) return null;
         return $this->mapper->map($data);
     }
+
+
+    #[Override]
+    public function create(User $user): bool
+    {
+         $query = "INSERT INTO users(username, email, password) VALUES (?, ?, ?)";
+         $stmt = $this->db->pdo()->prepare($query);
+         return $stmt->execute([$user->username, $user->email, $user->password]);
+    }
+
+
 }
