@@ -22,7 +22,7 @@
                     <details>
                         <summary>Auth</summary>
                         <ul class="bg-base-100 rounded-t-none p-2">
-                            <li><a href="/inscription" >Inscription</a></li>
+                            <li><a href="/inscription">Inscription</a></li>
                             <li><a href="/connexion">Connexion</a></li>
                         </ul>
                     </details>
@@ -30,6 +30,15 @@
             </ul>
         </div>
     </div>
+
+    <?php
+    $key = "success";
+    require __DIR__ . "/components/flash.php";
+    ?>
+    <?php
+    $key = "error";
+    require __DIR__ . "/components/flash.php";
+    ?>
     <?= $content ?? '' ?>
 </body>
 

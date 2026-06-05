@@ -2,9 +2,12 @@
 
 namespace App\Controllers;
 
+use DI\Container;
+
 abstract class Controller
 {
 
+    protected Container $container;
     protected function render(string $path, array $data = [])
     {
         extract($data);

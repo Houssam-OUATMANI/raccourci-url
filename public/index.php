@@ -4,15 +4,37 @@ use App\Controllers\AuthController;
 use App\Controllers\HomeController;
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
-
+use Slim\Flash\Messages;
 
 require dirname(__DIR__) . "/vendor/autoload.php";
 
 
 
-$container = new ContainerBuilder()->build();
+$container = new ContainerBuilder()->addDefinitions(
+    [
+        'flash' => function () {
+            $storage = [];
+            return new Messages($storage);
+        }
+    ]
+)
+    ->build();
 AppFactory::setContainer($container);
 $app = AppFactory::create();
+
+$app->add(
+    function ($request, $next) {
+        // Start PHP session
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+
+        // Change flash message storage
+        $this->get('flash')->__construct($_SESSION);
+
+        return $next->handle($request);
+    }
+);
 
 
 $app->addErrorMiddleware(true, true, true);
@@ -24,5 +46,3 @@ $app->get("/inscription", [AuthController::class, 'register']);
 $app->post("/inscription", [AuthController::class, 'handle_register']);
 $app->get("/connexion", [AuthController::class, 'login']);
 $app->run();
-
-

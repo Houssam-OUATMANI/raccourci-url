@@ -29,7 +29,7 @@ class UserRepo implements UserRepositoryInterface
     {
         $query = "SELECT * FROM users WHERE email = ?";
         $stmt = $this->db->pdo()->prepare($query);
-        $stmt->execute([$stmt]);
+        $stmt->execute([$email]);
         $data = $stmt->fetch();
         if (!$data) return null;
         return $this->mapper->map($data);
@@ -39,7 +39,7 @@ class UserRepo implements UserRepositoryInterface
     #[Override]
     public function create(User $user): bool
     {
-         $query = "INSERT INTO users(username, email, password, role) VALUES (?, ?, ?)";
+         $query = "INSERT INTO users(username, email, password, role) VALUES (?, ?, ?, ?)";
          $stmt = $this->db->pdo()->prepare($query);
          return $stmt->execute([$user->username, $user->email, $user->password, $user->role]);
     }
