@@ -40,4 +40,10 @@ class User
         $this->password = $password;
         return $this;
     }
+
+    public function set_role(string $role): self
+    {
+        $this->role = $role;
+        return $this;
+    }
 }
