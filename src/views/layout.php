@@ -24,6 +24,9 @@
                         <ul class="bg-base-100 rounded-t-none p-2">
                             <li><a href="/inscription">Inscription</a></li>
                             <li><a href="/connexion">Connexion</a></li>
+                            <form action="/deconnexion" method="post">
+                                <button class="btn btn-warning btn-xs">Deconnexion</button>
+                            </form>
                         </ul>
                     </details>
                 </li>

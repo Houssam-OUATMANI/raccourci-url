@@ -15,6 +15,7 @@
              <?php
                 $label = "Mot de passe";
                 $name = "password";
+                 $type = "password";
                 require dirname(__DIR__, 2) . "/components/input.php" ;
             ?>
 

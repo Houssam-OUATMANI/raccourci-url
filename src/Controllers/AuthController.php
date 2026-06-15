@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Config\Session;
 use App\Dto\CreateUserDto;
+use App\Dto\LoginUserDto;
 use App\Services\AuthService;
 use DI\Container;
 use Slim\Psr7\Request;
@@ -12,7 +14,12 @@ class AuthController extends Controller
 {
 
 
-    public function __construct(private AuthService $service, protected Container $container) {}
+    public function __construct(
+        private Session $session,
+        private AuthService $service,
+        protected Container $container,
+
+    ) {}
 
     public function register(Request $req, Response $res)
     {
@@ -42,5 +49,26 @@ class AuthController extends Controller
         $view = $this->render("auth/login");
         $res->getBody()->write($view);
         return $res;
+    }
+
+    public function handle_login(Request $req, Response $res)
+    {
+        $data = $req->getParsedBody();
+        $userDto = new LoginUserDto($data["email"], $data["password"]);
+        $user = $this->service->handle_login($userDto);
+        if (!$user) {
+            $this->container->get("flash")->addMessage("error", "Identifiants Incorrect");
+            return $res->withHeader("Location", "/connexion")->withStatus(302);
+        }
+
+        $this->session->add("user", $user);
+        return $res->withHeader("Location", "/")->withStatus(302);
+    }
+
+
+    public function logout (Request $req, Response $res) {
+        $this->session->remove("user");
+        $this->container->get("flash")->addMessage("success", "Deconnexion Reussi!");
+        return $res->withHeader("Location", "/")->withStatus(302);
     }
 }

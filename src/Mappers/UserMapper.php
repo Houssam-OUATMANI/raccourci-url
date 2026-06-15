@@ -14,6 +14,7 @@ class UserMapper
             ->set_id($data['id'])
             ->set_username($data['username'])
             ->set_email($data['email'])
+            ->set_role($data["role"])
             ->set_password($data['password']);
     }
 
