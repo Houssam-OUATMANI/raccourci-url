@@ -1,3 +1,10 @@
+<?php
+
+use App\Config\Session;
+
+$session = new Session();
+?>
+
 <!DOCTYPE html>
 <html lang="en" data-theme="cyberpunk">
 
@@ -22,11 +29,17 @@
                     <details>
                         <summary>Auth</summary>
                         <ul class="bg-base-100 rounded-t-none p-2">
-                            <li><a href="/inscription">Inscription</a></li>
-                            <li><a href="/connexion">Connexion</a></li>
-                            <form action="/deconnexion" method="post">
-                                <button class="btn btn-warning btn-xs">Deconnexion</button>
-                            </form>
+
+                            <?php if (!$session->has("user")) : ?>
+                                <li><a href="/inscription">Inscription</a></li>
+                                <li><a href="/connexion">Connexion</a></li>
+                            <?php endif ?>
+
+                            <?php if ($session->has("user")) : ?>
+                                <form action="/deconnexion" method="post">
+                                    <button class="btn btn-warning btn-xs">Deconnexion</button>
+                                </form>
+                            <?php endif ?>
                         </ul>
                     </details>
                 </li>
