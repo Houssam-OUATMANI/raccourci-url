@@ -15,5 +15,5 @@ interface UrlRepositoryInterface
     public function find_by_short(string $short) : ?Url;
 
 
-    public function create(Url $user) : bool;
+    public function create(Url $url) : bool;
 }
