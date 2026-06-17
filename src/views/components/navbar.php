@@ -15,10 +15,18 @@
         </div>
 
         <div class="flex items-center gap-2">
-
             <a href="/" class="btn btn-ghost rounded-full">
                 Accueil
             </a>
+
+
+
+            <select id="theme" class="select select-bordered">
+                <option value="light">☀️ Clair</option>
+                <option value="dark">🌙 Sombre</option>
+                <option value="cyberpunk">⚡ Cyberpunk</option>
+            </select>
+
 
             <?php if (!$session->has('user')) : ?>
 
@@ -30,6 +38,7 @@
                     Inscription 🚀
                 </a>
 
+
             <?php else : ?>
 
                 <div class="dropdown dropdown-end">
@@ -38,7 +47,7 @@
                         <div class="avatar placeholder">
                             <div class="bg-primary text-primary-content rounded-full w-10">
                                 <span>
-                                    <?= strtoupper(substr($session->get('user')['username'] ?? 'U', 0, 1)) ?>
+                                    <?= strtoupper(substr($session->get('user')->username ?? 'U', 0, 1)) ?>
                                 </span>
                             </div>
                         </div>
@@ -48,7 +57,7 @@
 
                         <li class="menu-title">
                             <span>
-                                <?= htmlspecialchars($session->get('user')['username'] ?? 'Utilisateur') ?>
+                                <?= htmlspecialchars($session->get('user')->username ?? 'Utilisateur') ?>
                             </span>
                         </li>
 
@@ -77,3 +86,18 @@
     </div>
 
 </nav>
+
+
+<script defer>
+    const themeSelect = document.querySelector("#theme")
+    const htmlElement = document.querySelector("html")
+
+    const theme = () => localStorage.getItem("theme") || "light"
+    htmlElement.dataset.theme = theme()
+
+
+    themeSelect.addEventListener("change", e => {
+        localStorage.setItem("theme", e.currentTarget.value);
+        htmlElement.dataset.theme = theme()
+    })
+</script>

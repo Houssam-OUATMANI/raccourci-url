@@ -6,7 +6,7 @@ $session = new Session();
 ?>
 
 <!DOCTYPE html>
-<html lang="en" data-theme="cyberpunk">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
