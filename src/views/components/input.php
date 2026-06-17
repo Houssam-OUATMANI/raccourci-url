@@ -1,12 +1,20 @@
-<?php 
+<?php
+
 $label ??= '';
 $name ??= '';
 $type ??= 'text';
 
 ?>
 
-<fieldset class="fieldset">
-  <legend class="fieldset-legend"><?= $label ?></legend>
-  <input type="<?= $type ?>" class="input w-full" name="<?= $name ?>" />
-</fieldset>
+<label class="form-control w-full">
+
+    <span class="label-text font-medium mb-2">
+        <?= htmlspecialchars($label) ?>
+    </span>
+
+    <input
+        type="<?= htmlspecialchars($type) ?>"
+        name="<?= htmlspecialchars($name) ?>"
+        class="input input-bordered w-full rounded-xl focus:input-primary"
+    />
 

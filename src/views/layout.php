@@ -18,43 +18,12 @@ $session = new Session();
 </head>
 
 <body class="container mx-auto">
-    <div class="navbar bg-base-100 shadow-sm">
-        <div class="flex-1">
-            <a href="/" class="btn btn-ghost text-xl">Raccouri URL</a>
-        </div>
-        <div class="flex-none">
-            <ul class="menu menu-horizontal px-1">
-                <li><a>Link</a></li>
-                <li>
-                    <details>
-                        <summary>Auth</summary>
-                        <ul class="bg-base-100 rounded-t-none p-2">
+    <?php require __DIR__ . "/components/navbar.php";?>
 
-                            <?php if (!$session->has("user")) : ?>
-                                <li><a href="/inscription">Inscription</a></li>
-                                <li><a href="/connexion">Connexion</a></li>
-                            <?php endif ?>
+    <?php $key = "success"; require __DIR__ . "/components/flash.php";?>
 
-                            <?php if ($session->has("user")) : ?>
-                                <form action="/deconnexion" method="post">
-                                    <button class="btn btn-warning btn-xs">Deconnexion</button>
-                                </form>
-                            <?php endif ?>
-                        </ul>
-                    </details>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <?php $key = "error"; require __DIR__ . "/components/flash.php"; ?>
 
-    <?php
-    $key = "success";
-    require __DIR__ . "/components/flash.php";
-    ?>
-    <?php
-    $key = "error";
-    require __DIR__ . "/components/flash.php";
-    ?>
     <?= $content ?? '' ?>
 </body>
 
