@@ -29,7 +29,7 @@ class CreateUrlsTable
 
     public function down()
     {
-        $query = "DROP TABLE IF EXISTS users";
+        $query = "DROP TABLE IF EXISTS urls";
         if ($this->db->pdo()->exec($query)) {
             echo "Migration executee avec success";
         }

@@ -4,9 +4,7 @@ namespace App\Repositories;
 
 use App\Database\Db;
 use App\Entities\Url;
-use App\Entities\User;
 use App\Interfaces\UrlRepositoryInterface;
-use App\Interfaces\UserRepositoryInterface;
 use App\Mappers\UrlMapper;
 use Override;
 
