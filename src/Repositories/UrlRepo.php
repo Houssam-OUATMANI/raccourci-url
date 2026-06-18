@@ -25,6 +25,17 @@ class UrlRepo implements UrlRepositoryInterface
 
 
     #[Override]
+    public function find_all_by_user_id(int $user_id): array
+    {
+        $query = "SELECT * FROM urls WHERE user_id = ?";
+        $stmt = $this->db->pdo()->prepare($query);
+        $stmt->execute([$user_id]);
+        $data = $stmt->fetchAll();
+        return $this->mapper->map_collection($data);
+    }
+
+
+    #[Override]
     public function find_by_short(string $short): ?Url
     {
         $query = "SELECT * FROM urls WHERE short = ?";

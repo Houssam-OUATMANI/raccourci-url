@@ -12,9 +12,9 @@ class UrlService
 
     public function __construct(private UrlRepo $repo) {}
 
-    public function index()
+    public function index_user(int $user_id)
     {
-        return $this->repo->all();
+        return $this->repo->find_all_by_user_id($user_id);
     }
 
 

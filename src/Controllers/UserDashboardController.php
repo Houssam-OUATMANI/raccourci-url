@@ -14,7 +14,12 @@ class UserDashboardController extends Controller
     public function __construct(private Session $session, private UrlService $service) {}
     public function index(Request $req, Response $res)
     {
-        $view = $this->render("dashboard/index");
+
+        $user_id = $this->session->get("user")->id;
+        $urls = $this->service->index_user($user_id);
+
+
+        $view = $this->render("dashboard/index", compact("urls"));
         $res->getBody()->write($view);
         return $res;
     }
@@ -35,10 +40,14 @@ class UserDashboardController extends Controller
         $is_public = isset($data["is_public"]) ?? false;
         $user_id = $this->session->get("user")->id;
         $url_dto =  new CreateUrlDto($originalUrl, $user_id, $is_public);
+        
    
 
         // *** Service  $url_dto
         $this->service->store($url_dto);
-        return $res;
+
+         $this->container->get("flash")->addMessage("success", "Url Raccourci");
+        return $res->withHeader("Location", "/tableau-de-bord")->withStatus(302);
+        
     }
 }

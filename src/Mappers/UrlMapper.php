@@ -15,6 +15,7 @@ class UrlMapper
             ->set_id($data['id'])
             ->set_origin($data['origin'])
             ->set_short($data['short'])
+            ->set_is_public($data["is_public"])
             ->set_user_id($data["user_id"]);
     }
 

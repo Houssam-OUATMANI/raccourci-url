@@ -62,7 +62,7 @@
                         </li>
 
                         <li>
-                            <a href="/dashboard">
+                            <a href="/tableau-de-bord">
                                 📊 Tableau de bord
                             </a>
                         </li>
