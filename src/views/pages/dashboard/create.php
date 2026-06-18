@@ -25,6 +25,13 @@
                 require dirname(__DIR__, 2) . "/components/input.php";
                 ?>
 
+                 <?php
+                $label = "En cochant la case le lien sera visible par d'autre utilisateur";
+                $name = "is_public";
+                $type = "checkbox";
+                require dirname(__DIR__, 2) . "/components/input.php";
+                ?>
+
 
                 <button class="btn btn-primary btn-block mt-6 rounded-xl">
                     Raccourcir 🚀

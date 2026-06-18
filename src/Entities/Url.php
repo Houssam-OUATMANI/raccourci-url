@@ -33,6 +33,11 @@ class Url
         $this->short = $short;
         return $this;
     }
+      public function set_is_public(bool $is_public): self
+    {
+        $this->is_public = $is_public;
+        return $this;
+    }
 
 
     public function set_user_id(int $user_id): self

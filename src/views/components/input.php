@@ -15,6 +15,6 @@ $type ??= 'text';
     <input
         type="<?= htmlspecialchars($type) ?>"
         name="<?= htmlspecialchars($name) ?>"
-        class="input input-bordered w-full rounded-xl focus:input-primary"
+        class="<?= $type === 'checkbox' ? 'checkbox' : 'input input-bordered w-full rounded-xl focus:input-primary'?>" 
     />
 

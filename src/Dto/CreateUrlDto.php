@@ -8,5 +8,6 @@ class CreateUrlDto
     public function __construct(
         public string $origin,
         public int $user_id,
+        public bool $is_public
     ) {}
 }

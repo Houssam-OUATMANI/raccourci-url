@@ -44,6 +44,7 @@ class UrlService
         $url = new Url()
             ->set_origin($dto->origin)
             ->set_short($short)
+            ->set_is_public($dto->is_public)
             ->set_user_id($dto->user_id);
 
         return $this->repo->create($url);
