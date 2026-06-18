@@ -17,8 +17,8 @@ class CreateUrlsTable
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             origin TEXT NOT NULL,
             short TEXT NOT NULL UNIQUE,
-            is_public INTEGER NOT NULL
-            user_id INTEGER
+            is_public INTEGER NOT NULL,
+            user_id INTEGER,
             FOREIGN KEY(user_id) REFERENCES user(id)
         )";
 

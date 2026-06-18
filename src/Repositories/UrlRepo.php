@@ -39,9 +39,9 @@ class UrlRepo implements UrlRepositoryInterface
     #[Override]
     public function create(Url $url): bool
     {
-         $query = "INSERT INTO urls(origin, short, user_id) VALUES (?, ?, ?)";
+         $query = "INSERT INTO urls(origin, short, is_public, user_id) VALUES (?, ?, ?, ?)";
          $stmt = $this->db->pdo()->prepare($query);
-         return $stmt->execute([$url->origin, $url->short, $url->user_id]);
+         return $stmt->execute([$url->origin, $url->short, $url->is_public, $url->user_id]);
     }
 
 
