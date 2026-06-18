@@ -50,10 +50,17 @@ class UrlRepo implements UrlRepositoryInterface
     #[Override]
     public function create(Url $url): bool
     {
-         $query = "INSERT INTO urls(origin, short, is_public, user_id) VALUES (?, ?, ?, ?)";
-         $stmt = $this->db->pdo()->prepare($query);
-         return $stmt->execute([$url->origin, $url->short, $url->is_public, $url->user_id]);
+        $query = "INSERT INTO urls(origin, short, is_public, user_id) VALUES (?, ?, ?, ?)";
+        $stmt = $this->db->pdo()->prepare($query);
+        return $stmt->execute([$url->origin, $url->short, $url->is_public, $url->user_id]);
     }
 
 
+
+    public function destroy(int $id)
+    {
+        $query = "DELETE FROM urls WHERE id = ?";
+        $stmt = $this->db->pdo()->prepare($query);
+        return $stmt->execute([$id]);
+    }
 }

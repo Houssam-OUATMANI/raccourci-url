@@ -52,6 +52,11 @@ class UrlService
     }
 
 
+    public function destroyUrl(int $id) {
+        return $this->repo->destroy($id);
+    }
+
+
     private function generate_uniqid() : string {
         return substr(uniqid(rand()), 0, 6);
     }

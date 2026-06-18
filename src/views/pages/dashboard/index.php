@@ -87,7 +87,7 @@ $urls ??= [];
 
                                     <td>
                                         <a
-                                            href="/<?= htmlspecialchars($url->short) ?>"
+                                            href="<?= htmlspecialchars($url->origin) ?>"
                                             target="_blank"
                                             class="link link-primary"
                                         >

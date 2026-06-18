@@ -5,13 +5,18 @@ namespace App\Controllers;
 use App\Config\Session;
 use App\Dto\CreateUrlDto;
 use App\Services\UrlService;
+use DI\Container;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 
 class UserDashboardController extends Controller
 {
 
-    public function __construct(private Session $session, private UrlService $service) {}
+    public function __construct(
+        private Session $session,
+         private UrlService $service,
+         protected Container $container
+         ) {}
     public function index(Request $req, Response $res)
     {
 
@@ -40,14 +45,22 @@ class UserDashboardController extends Controller
         $is_public = isset($data["is_public"]) ?? false;
         $user_id = $this->session->get("user")->id;
         $url_dto =  new CreateUrlDto($originalUrl, $user_id, $is_public);
-        
-   
+
+
 
         // *** Service  $url_dto
         $this->service->store($url_dto);
 
-         $this->container->get("flash")->addMessage("success", "Url Raccourci");
+        $this->container->get("flash")->addMessage("success", "Url Raccourci");
         return $res->withHeader("Location", "/tableau-de-bord")->withStatus(302);
-        
+    }
+
+
+    public function destroyUrl(Request $req, Response $res)
+    {
+        $id = $req->getAttributes()["id"];
+        $this->service->destroyUrl($id);
+        $this->container->get("flash")->addMessage("success", "Url Supprimee");
+        return $res->withHeader("Location", "/tableau-de-bord")->withStatus(302);
     }
 }

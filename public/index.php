@@ -37,6 +37,11 @@ $app->get("/tableau-de-bord", [UserDashboardController::class, 'index'])->add(Au
 $app->get("/lien/ajouter", [UserDashboardController::class, 'createUrl'])->add(AuthMiddleware::class);
 $app->post("/lien/ajouter", [UserDashboardController::class, 'storeUrl'])->add(AuthMiddleware::class);
 
+$app->post("/lien/supprimer/{id}", [UserDashboardController::class, 'destroyUrl'])->add(AuthMiddleware::class);
+
+
+
+
 
 
 
