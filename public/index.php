@@ -34,7 +34,7 @@ $app->get("/", [HomeController::class,  'index']);
 $app->get("/about", [HomeController::class,  'about'])->add(AuthMiddleware::class);
 $app->post("/deconnexion", [AuthController::class, 'logout'])->add(AuthMiddleware::class);
 $app->get("/tableau-de-bord", [UserDashboardController::class, 'index'])->add(AuthMiddleware::class);
-$app->get("/lien/ajouter", [UserDashboardController::class, 'create'])->add(AuthMiddleware::class);
+$app->get("/lien/ajouter", [UserDashboardController::class, 'createUrl'])->add(AuthMiddleware::class);
 $app->post("/lien/ajouter", [UserDashboardController::class, 'storeUrl'])->add(AuthMiddleware::class);
 
 

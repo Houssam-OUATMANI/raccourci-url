@@ -10,6 +10,7 @@ class Url
     public ?int $id;
     public string $origin;
     public string $short;
+    public bool $is_public; 
     public int $user_id;
 
 

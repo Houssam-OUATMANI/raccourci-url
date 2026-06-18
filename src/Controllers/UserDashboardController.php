@@ -19,7 +19,7 @@ class UserDashboardController extends Controller
     }
 
 
-    public function create(Request $req, Response $res)
+    public function createUrl(Request $req, Response $res)
     {
         $view = $this->render("dashboard/create");
         $res->getBody()->write($view);
