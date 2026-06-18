@@ -6,7 +6,7 @@ namespace App\Config;
 class Session
 {
 
-    public function add(string $key, mixed $value)
+    public function add(string $key, mixed $value) : void
     {
         $_SESSION[$key] = $value;
     }

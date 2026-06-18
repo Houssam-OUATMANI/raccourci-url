@@ -57,12 +57,13 @@ class AuthController extends Controller
         $userDto = new LoginUserDto($data["email"], $data["password"]);
         $user = $this->service->handle_login($userDto);
         if (!$user) {
-            $this->container->get("flash")->addMessage("error", "Identifiants Incorrect");
+            $this->container->get("flash")->addMessage("error", "Identifiants Incorrects");
             return $res->withHeader("Location", "/connexion")->withStatus(302);
         }
 
+        $this->container->get("flash")->addMessage("success", "Hello $user->username");
         $this->session->add("user", $user);
-        return $res->withHeader("Location", "/")->withStatus(302);
+        return $res->withHeader("Location", "/tableau-de-bord")->withStatus(302);
     }
 
 

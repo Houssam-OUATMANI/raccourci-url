@@ -2,8 +2,10 @@
 
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
+use App\Controllers\UserDashboardController;
 use App\middlewares\AuthMiddleware;
 use App\middlewares\GuestMiddleware;
+use App\middlewares\SessionFlashMiddleware;
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
 use Slim\Flash\Messages;
@@ -24,29 +26,14 @@ $container = new ContainerBuilder()->addDefinitions(
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
-$app->add(
-    function ($request, $next) {
-       
-
-        // Start PHP session
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            session_start();
-        }
-
-        // Change flash message storage
-        $this->get('flash')->__construct($_SESSION);
-
-        return $next->handle($request);
-    }
-);
-
-
+$app->add(SessionFlashMiddleware::class);
 $app->addErrorMiddleware(true, true, true);
 
 
 $app->get("/", [HomeController::class,  'index']);
 $app->get("/about", [HomeController::class,  'about'])->add(AuthMiddleware::class);
 $app->post("/deconnexion", [AuthController::class, 'logout'])->add(AuthMiddleware::class);
+$app->get("/tableau-de-bord", [UserDashboardController::class, 'index'])->add(AuthMiddleware::class);
 
 
 
