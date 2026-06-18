@@ -3,16 +3,14 @@
 namespace App\Controllers;
 
 use App\Config\Session;
+use App\Dto\CreateUrlDto;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 
 class UserDashboardController extends Controller
 {
 
-        public function __construct(private Session $session)
-        {
-            
-        }
+    public function __construct(private Session $session) {}
     public function index(Request $req, Response $res)
     {
         $view = $this->render("dashboard/index");
@@ -21,7 +19,7 @@ class UserDashboardController extends Controller
     }
 
 
-     public function create(Request $req, Response $res)
+    public function create(Request $req, Response $res)
     {
         $view = $this->render("dashboard/create");
         $res->getBody()->write($view);
@@ -29,12 +27,14 @@ class UserDashboardController extends Controller
     }
 
 
-     public function storeUrl(Request $req, Response $res)
+    public function storeUrl(Request $req, Response $res)
     {
-        dd($req->getParsedBody(), $this->session->get("user") );
-        
-        $view = $this->render("dashboard/create");
-        $res->getBody()->write($view);
+
+        $originalUrl = $req->getParsedBody()["original"];
+        $user_id = $this->session->get("user")->id;
+        $url_dto =  new CreateUrlDto($originalUrl, $user_id);
+
+        // *** Service  $url_dto
         return $res;
     }
 }
