@@ -24,8 +24,7 @@ class AuthController extends Controller
     public function register(Request $req, Response $res)
     {
         $view = $this->render("auth/register");
-        $res->getBody()->write($view);
-        return $res;
+       
     }
 
     public function handle_register(Request $req, Response $res)
