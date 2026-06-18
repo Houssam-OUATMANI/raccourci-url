@@ -14,9 +14,9 @@ class UserDashboardController extends Controller
 
     public function __construct(
         private Session $session,
-         private UrlService $service,
-         protected Container $container
-         ) {}
+        private UrlService $service,
+        protected Container $container
+    ) {}
     public function index(Request $req, Response $res)
     {
 
@@ -59,6 +59,8 @@ class UserDashboardController extends Controller
     public function destroyUrl(Request $req, Response $res)
     {
         $id = $req->getAttributes()["id"];
+        // TODO VERFIFIER LES AUTHORISATION
+        
         $this->service->destroyUrl($id);
         $this->container->get("flash")->addMessage("success", "Url Supprimee");
         return $res->withHeader("Location", "/tableau-de-bord")->withStatus(302);
