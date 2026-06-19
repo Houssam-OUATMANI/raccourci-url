@@ -57,6 +57,7 @@ $urls ??= [];
                             <th>#</th>
                             <th>URL d'origine</th>
                             <th>Lien court</th>
+                            <th>Visibilité</th>
                             <th class="text-right">Actions</th>
                         </tr>
                     </thead>
@@ -93,6 +94,12 @@ $urls ??= [];
                                         >
                                             <?= htmlspecialchars($url->short) ?>
                                         </a>
+                                    </td>
+
+                                    <td>
+                                        <div class="badge badge-<?= $url->is_public ? 'success' : 'error' ?>">
+                                            <?= $url->is_public ? 'Publique' : 'privée' ?>
+                                        </div>
                                     </td>
 
                                     <td>
