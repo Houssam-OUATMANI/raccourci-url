@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Database\Db;
+use App\Dto\UpdateUrlDto;
 use App\Entities\Url;
 use App\Interfaces\UrlRepositoryInterface;
 use App\Mappers\UrlMapper;
@@ -63,6 +64,13 @@ class UrlRepo implements UrlRepositoryInterface
         $query = "INSERT INTO urls(origin, short, is_public, user_id) VALUES (?, ?, ?, ?)";
         $stmt = $this->db->pdo()->prepare($query);
         return $stmt->execute([$url->origin, $url->short, $url->is_public, $url->user_id]);
+    }
+
+
+    public function updateUrl(UpdateUrlDto $dto) {
+         $query = "UPDATE urls SET origin = ?, is_public = ? WHERE id = ? ";
+         $stmt = $this->db->pdo()->prepare($query);
+         return $stmt->execute([$dto->origin,$dto->is_public, $dto->url_id]);
     }
 
 

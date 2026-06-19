@@ -38,6 +38,7 @@ $app->get("/lien/ajouter", [UserDashboardController::class, 'createUrl'])->add(A
 $app->post("/lien/ajouter", [UserDashboardController::class, 'storeUrl'])->add(AuthMiddleware::class);
 
 $app->get("/lien/editer/{id}", [UserDashboardController::class, 'editUrl'])->add(AuthMiddleware::class);
+$app->post("/lien/editer/{id}", [UserDashboardController::class, 'updateUrl'])->add(AuthMiddleware::class);
 $app->post("/lien/supprimer/{id}", [UserDashboardController::class, 'destroyUrl'])->add(AuthMiddleware::class);
 
 

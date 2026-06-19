@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Config\Session;
 use App\Dto\CreateUrlDto;
+use App\Dto\UpdateUrlDto;
 use App\Services\UrlService;
 use DI\Container;
 use Slim\Psr7\Request;
@@ -56,21 +57,37 @@ class UserDashboardController extends Controller
     }
 
 
-    public function editUrl(Request $req, Response $res) {
+    public function editUrl(Request $req, Response $res)
+    {
         $id = $req->getAttributes()["id"];
 
         $url = $this->service->find_url_by_id($id);
-       
+
         $view = $this->render("dashboard/edit", compact("url"));
         $res->getBody()->write($view);
         return $res;
+    }
+
+    public function updateUrl(Request $req, Response $res)
+    {
+        $data = $req->getParsedBody();
+        $url_id = $req->getAttributes()["id"];
+        $originalUrl = $data["original"];
+        $is_public = isset($data["is_public"]) ?? false;
+        $user_id = $this->session->get("user")->id;
+        $url_dto =  new UpdateUrlDto($originalUrl, $user_id, $is_public, $url_id);
+
+        $this->service->update($url_dto);
+
+        $this->container->get("flash")->addMessage("success", "Url mise à jour");
+        return $res->withHeader("Location", "/tableau-de-bord")->withStatus(302);
     }
 
     public function destroyUrl(Request $req, Response $res)
     {
         $id = $req->getAttributes()["id"];
         // TODO VERFIFIER LES AUTHORISATION
-        
+
         $this->service->destroyUrl($id);
         $this->container->get("flash")->addMessage("success", "Url Supprimee");
         return $res->withHeader("Location", "/tableau-de-bord")->withStatus(302);

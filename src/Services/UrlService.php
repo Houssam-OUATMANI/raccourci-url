@@ -4,6 +4,7 @@
 namespace App\Services;
 
 use App\Dto\CreateUrlDto;
+use App\Dto\UpdateUrlDto;
 use App\Entities\Url;
 use App\Repositories\UrlRepo;
 
@@ -53,6 +54,10 @@ class UrlService
             ->set_user_id($dto->user_id);
 
         return $this->repo->create($url);
+    }
+
+    public function update(UpdateUrlDto $dto) {
+        return $this->repo->updateUrl($dto);
     }
 
 
