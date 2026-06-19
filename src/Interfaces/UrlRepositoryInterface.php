@@ -15,12 +15,15 @@ interface UrlRepositoryInterface
     /**
      * @return Url[]
      */
-   public function find_all_by_user_id(int $user_id): array;
+    public function find_all_by_user_id(int $user_id): array;
+
+
+    public function find_by_id(int $url_id): Url;
 
 
 
-    public function find_by_short(string $short) : ?Url;
+    public function find_by_short(string $short): ?Url;
 
 
-    public function create(Url $url) : bool;
+    public function create(Url $url): bool;
 }

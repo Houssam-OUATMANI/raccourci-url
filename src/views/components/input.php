@@ -3,6 +3,8 @@
 $label ??= '';
 $name ??= '';
 $type ??= 'text';
+$value ??= "";
+$checked ??= false;
 
 ?>
 
@@ -13,6 +15,8 @@ $type ??= 'text';
     </span>
 
     <input
+        <?=  $type !== 'checkbox' ? "value=$value" : ""  ?>
+        <?= $checked ? 'checked' : "" ?>
         type="<?= htmlspecialchars($type) ?>"
         name="<?= htmlspecialchars($name) ?>"
         class="<?= $type === 'checkbox' ? 'checkbox' : 'input input-bordered w-full rounded-xl focus:input-primary'?>" 

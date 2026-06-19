@@ -56,6 +56,16 @@ class UserDashboardController extends Controller
     }
 
 
+    public function editUrl(Request $req, Response $res) {
+        $id = $req->getAttributes()["id"];
+
+        $url = $this->service->find_url_by_id($id);
+       
+        $view = $this->render("dashboard/edit", compact("url"));
+        $res->getBody()->write($view);
+        return $res;
+    }
+
     public function destroyUrl(Request $req, Response $res)
     {
         $id = $req->getAttributes()["id"];

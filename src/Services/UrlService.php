@@ -25,6 +25,10 @@ class UrlService
         return $url->origin;
     }
 
+    public function find_url_by_id(int $url_id) : Url {
+        return $this->repo->find_by_id($url_id);
+    }
+
 
     public function store(CreateUrlDto $dto)
     {
